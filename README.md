@@ -1,5 +1,5 @@
-[![Check dist](https://github.com/opt-nc/domain-nc-action/actions/workflows/check-dist.yml/badge.svg)](https://github.com/opt-nc/domain-nc-action/actions/workflows/check-dist.yml)
-[![Unit test](https://github.com/opt-nc/domain-nc-action/actions/workflows/test.yml/badge.svg)](https://github.com/opt-nc/domain-nc-action/actions/workflows/test.yml)
+[![Check dist](https://github.com/opt-nc/domaine-nc-action/actions/workflows/check-dist.yml/badge.svg)](https://github.com/opt-nc/domaine-nc-action/actions/workflows/check-dist.yml)
+[![units-test](https://github.com/opt-nc/domaine-nc-action/actions/workflows/test.yml/badge.svg)](https://github.com/opt-nc/domaine-nc-action/actions/workflows/test.yml)
 
 # 💻 domaine-nc-action
 
