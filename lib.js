@@ -12,7 +12,7 @@ module.exports = async function () {
       url: `https://domaine-nc.p.rapidapi.com/${name}/${ext}`,
       headers: {
         'x-rapidapi-host': 'domaine-nc.p.rapidapi.com',
-        'x-rapidapi-key': apiKey, // '35843932e5msheb12d4c749d0446p1f0ad7jsn8b762fb6154c'
+        'x-rapidapi-key': apiKey,
       },
     });
 
@@ -20,10 +20,6 @@ module.exports = async function () {
       core.wan(`⚠️ ${name}.${ext} is expired since ${response.data.dateExpiration} ⚠️`);
     } else {
       core.info(`✅ ${name}.${ext} expires within ${response.data.nbDaysBeforeExpires} day(s)`);
-    }
-
-    if (response.data.note) {
-      core.notice(response.data.note);
     }
 
     core.setOutput('expired', response.data.expired);
