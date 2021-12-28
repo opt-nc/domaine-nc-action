@@ -1,0 +1,30 @@
+# action.yml
+name: 'Get your .nc domain name validity metadata'
+description: 'Check if your `*.nc` domain name is not expired and when it will be using metadata on output'
+branding:
+  icon: 'zap'
+  color: 'red'
+
+inputs:
+  api-key:
+    description: 'Rapid API Key'
+    required: true
+  name:
+    description: "Domain name without extension (ex: 'opt' for 'opt.nc')"
+    required: true
+  ext:
+    description: "Extension between ; 'nc', 'asso.nc' and 'nom.nc'"
+    required: true
+    default: nc
+
+outputs:
+  expired:
+    description: true or false
+  expirationDate:
+    description: yyyy-mm-dd
+  daysBeforeExpiration:
+    description: Number of days before domain name expires
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

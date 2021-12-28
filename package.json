@@ -1,0 +1,37 @@
+{
+  "name": "domain-nc-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to check if your *.nc domain name is not expired and when it will be",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opt-nc/domain-nc-action.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "domain-nc"
+  ],
+  "author": "OPT.nc",
+  "license": "GNU Version 3",
+  "bugs": {
+    "url": "https://github.com/opt-nc/domain-nc-action/issues"
+  },
+  "homepage": "https://github.com/opt-nc/domain-nc-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.31.1",
+    "eslint": "^8.0.0",
+    "jest": "^27.2.5",
+    "nock": "^13.2.1"
+  }
+}
