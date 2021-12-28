@@ -32,7 +32,7 @@ jobs:
           name: ${{ github.event.inputs.domain }}
 
       - name: Create an warning ⚠️ issue if needed
-        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= inputs.daysBeforeExpiration }}
+        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= github.event.inputs.daysBeforeExpiration }}
         uses: actions/github-script@v5
         with:
           script: |
@@ -45,7 +45,7 @@ jobs:
             });
 
       - name: Create an alert 🚨 issue if needed
-        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= inputs.daysBeforeExpiration }}
+        if: ${{ steps.meta.outputs.expired }}
         uses: actions/github-script@v5
         with:
           script: |
