@@ -1,5 +1,5 @@
 # action.yml
-name: 'Get validity metadata of your `*.nc` domain name'
+name: 'Get your .nc domain name validity metadata'
 description: 'Check if your `*.nc` domain name is not expired and when it will be using metadata on output'
 branding:
   icon: 'zap'
@@ -19,9 +19,11 @@ inputs:
 
 outputs:
   expired:
-    description: "'true' or 'false'"
+    description: true or false
   expirationDate:
-    description: 'yyyy-mm-dd'
+    description: yyyy-mm-dd
+  daysBeforeExpiration:
+    description: Number of days before domain name expires
 
 runs:
   using: 'node12'

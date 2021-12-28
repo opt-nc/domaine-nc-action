@@ -28,6 +28,7 @@ module.exports = async function () {
 
     core.setOutput('expired', response.data.expired);
     core.setOutput('expirationDate', response.data.dateExpiration);
+    core.setOutput('daysBeforeExpiration', response.data.nbDaysBeforeExpires);
   } catch (error) {
     if (error.response && error.response.status === 401) {
       core.setFailed('HTTP 401 : maybe invalid api-key ?');
@@ -35,4 +36,4 @@ module.exports = async function () {
       core.setFailed(error);
     }
   }
-}
+};

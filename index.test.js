@@ -23,7 +23,7 @@ test('returns expired and expiration date', async () => {
     .reply(200, {
       expired: false,
       dateExpiration: '2021-12-28',
-      nbDaysBeforeExpires: 45
+      nbDaysBeforeExpires: 45,
     });
 
   // When
@@ -31,5 +31,6 @@ test('returns expired and expiration date', async () => {
 
   // Then
   expect(setOutput).toBeCalledWith('expired', false);
-  expect(setOutput).toBeCalledWith('expirationDate', "2021-12-28");
+  expect(setOutput).toBeCalledWith('expirationDate', '2021-12-28');
+  expect(setOutput).toBeCalledWith('daysBeforeExpiration', 45);
 });
