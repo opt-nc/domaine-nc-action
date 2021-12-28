@@ -1,0 +1,56 @@
+name: Reusable workflow example using action with an issue creation
+
+on:
+  workflow_dispatch:
+    domain:
+      required: true
+      type: choice
+      default: opt
+      options:
+      - opt
+      - domain
+      - 1012
+      - ccp
+    daysBeforeExpiration:
+      required: true
+      default: 5
+      type: number
+      description: Days before domain expiration that triggers new issue
+
+jobs:
+  check:
+    name: Check ${{ inputs.domain }} and create an issue if it's about to expire within ${{ inputs.daysBeforeExpiration }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+        id: meta
+        with:
+          api-key: ${{ secrets.RAPID_API_KEY }}
+          name: ${{ inputs.domain }}
+
+      - name: Create an warning ⚠️ issue if needed
+        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= inputs.daysBeforeExpiration }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            octokit.rest.issues.create({
+              owner: '${{ github.repository_owner	}}',
+              repo: '${{ github.repository	}}'.split('/')[1],
+              title: ':warning: Domain ${{ inputs.domain }}.nc is about to expire :warning:',
+              body: ':point_right: ${{ inputs.domain }}.nc will expire on ${{ steps.meta.outputs.expirationDate }}',
+              labels: 'expired-domain'
+            });
+
+      - name: Create an alert 🚨 issue if needed
+        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= inputs.daysBeforeExpiration }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            octokit.rest.issues.create({
+              owner: '${{ github.repository_owner	}}',
+              repo: '${{ github.repository	}}'.split('/')[1],
+              title: ':rotating_light: Domain ${{ inputs.domain }}.nc has expired :rotating_light:',
+              body: ':point_right: ${{ inputs.domain }}.nc has expired on ${{ steps.meta.outputs.expirationDate }}',
+              labels: 'expired-domain'
+            });
+
