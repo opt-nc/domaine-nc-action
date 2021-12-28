@@ -1,5 +1,5 @@
 # action.yml
-name: 'Get your .nc domain name validity metadata'
+name: 'Get your .nc domain validity metadata'
 description: 'Check if your `*.nc` domain name is not expired and when it will be using metadata on output'
 branding:
   icon: 'award'
