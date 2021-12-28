@@ -31,12 +31,17 @@ jobs:
           api-key: ${{ secrets.RAPID_API_KEY }}
           name: ${{ github.event.inputs.domain }}
 
+      - name: Debug
+        run: |
+          echo "expired: " ${{ steps.meta.outputs.expired }}
+          echo "daysBeforeExpiration: " ${{ steps.meta.outputs.daysBeforeExpiration }}
+
       - name: Create an warning ⚠️ issue if needed
         if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= github.event.inputs.daysBeforeExpiration }}
         uses: actions/github-script@v5
         with:
           script: |
-            octokit.rest.issues.create({
+            github.rest.issues.create({
               owner: '${{ github.repository_owner	}}',
               repo: '${{ github.repository	}}'.split('/')[1],
               title: ':warning: Domain ${{ github.event.inputs.domain }}.nc is about to expire :warning:',
@@ -49,7 +54,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            octokit.rest.issues.create({
+            github.rest.issues.create({
               owner: '${{ github.repository_owner	}}',
               repo: '${{ github.repository	}}'.split('/')[1],
               title: ':rotating_light: Domain ${{ github.event.inputs.domain }}.nc has expired :rotating_light:',
