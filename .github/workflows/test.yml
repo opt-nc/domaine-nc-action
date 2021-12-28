@@ -13,4 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci
-      - run: npm test
+      - run: npm testz
+  # e2e tests
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+        id: test
+        with:
+          api-key: ${{ secrets.RAPID_API_KEY }}
+          name: opt
+      - run: |
+          echo ${{ steps.test.ouputs.expired }}
+          echo ${{ steps.test.ouputs.expirationDate }}
+          echo ${{ steps.test.ouputs.daysBeforeExpiration }}
