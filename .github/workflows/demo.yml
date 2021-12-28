@@ -23,13 +23,12 @@ jobs:
     name: Check and create an issue if it's about to expire within
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Launch with" ${{ inputs.domain }}.nc and ${{ inputs.daysBeforeExpiration }}
       - uses: actions/checkout@v2
       - uses: ./
         id: meta
         with:
           api-key: ${{ secrets.RAPID_API_KEY }}
-          name: ${{ inputs.domain }}
+          name: ${{ github.event.inputs.domain }}
 
       - name: Create an warning ⚠️ issue if needed
         if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= inputs.daysBeforeExpiration }}
@@ -39,8 +38,8 @@ jobs:
             octokit.rest.issues.create({
               owner: '${{ github.repository_owner	}}',
               repo: '${{ github.repository	}}'.split('/')[1],
-              title: ':warning: Domain ${{ inputs.domain }}.nc is about to expire :warning:',
-              body: ':point_right: ${{ inputs.domain }}.nc will expire on ${{ steps.meta.outputs.expirationDate }}',
+              title: ':warning: Domain ${{ github.event.inputs.domain }}.nc is about to expire :warning:',
+              body: ':point_right: ${{ github.event.inputs.domain }}.nc will expire on ${{ steps.meta.outputs.expirationDate }}',
               labels: 'expired-domain'
             });
 
@@ -52,8 +51,8 @@ jobs:
             octokit.rest.issues.create({
               owner: '${{ github.repository_owner	}}',
               repo: '${{ github.repository	}}'.split('/')[1],
-              title: ':rotating_light: Domain ${{ inputs.domain }}.nc has expired :rotating_light:',
-              body: ':point_right: ${{ inputs.domain }}.nc has expired on ${{ steps.meta.outputs.expirationDate }}',
+              title: ':rotating_light: Domain ${{ github.event.inputs.domain }}.nc has expired :rotating_light:',
+              body: ':point_right: ${{ github.event.inputs.domain }}.nc has expired on ${{ steps.meta.outputs.expirationDate }}',
               labels: 'expired-domain'
             });
 
