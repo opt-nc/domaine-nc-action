@@ -24,7 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - name: Call the action
+        uses: ./
         id: meta
         with:
           api-key: ${{ secrets.RAPID_API_KEY }}
