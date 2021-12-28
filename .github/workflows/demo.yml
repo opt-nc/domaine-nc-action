@@ -1,4 +1,4 @@
-name: Reusable workflow example using action with an issue creation
+name: Example using action with an issue creation
 
 on:
   workflow_dispatch:
@@ -20,9 +20,10 @@ on:
 
 jobs:
   check:
-    name: Check ${{ inputs.domain }} and create an issue if it's about to expire within ${{ inputs.daysBeforeExpiration }}
+    name: Check and create an issue if it's about to expire within
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Launch with" ${{ inputs.domain }}.nc and ${{ inputs.daysBeforeExpiration }}
       - uses: actions/checkout@v2
       - uses: ./
         id: meta
