@@ -18,6 +18,7 @@ jobs:
   # e2e tests
   e2e:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' # secrets not available
     steps:
       - uses: actions/checkout@v2
       - uses: ./
