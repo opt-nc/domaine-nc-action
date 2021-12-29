@@ -50,8 +50,12 @@ In this example, a Slack message is send based on the output of the action for d
 
 | name                   | description                               |
 | ---------------------- | ----------------------------------------- |
-| `expired`              | `'true'` or `'false'`                         |
+| `expired`              | `'true'` or `'false'`                     |
 | `expirationDate`       | `'yyyy-mm-dd'`                            |
 | `daysBeforeExpiration` | Number of days before domain name expires |
+
+## Go see the demo worflow ! 🎇
+
+It's [here](https://github.com/opt-nc/domaine-nc-action-demo) !
 
 Enjoy 👍

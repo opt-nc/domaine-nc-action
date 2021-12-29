@@ -1,26 +1,22 @@
 name: Example using action with an issue creation
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:        
       domain:
         description: Domain name without extenstion
         required: true
-        type: choice
-        default: opt
-        options:
-        - opt
-        - domain
-        - '1012'
-        - ccp
+        type: string
       daysBeforeExpiration:
         description: Days before domain expiration that triggers new issue
         required: true
-        default: '5'
+        default: 5
+        type: number
+    secrets:
+      rapidapi-key:
 
 jobs:
   check:
-    name: Check and create an issue if it's about to expire within
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +24,7 @@ jobs:
         uses: ./
         id: meta
         with:
-          api-key: ${{ secrets.RAPID_API_KEY }}
+          api-key: ${{ secrets.rapidapi-key }}
           name: ${{ github.event.inputs.domain }}
 
       - name: Create an warning ⚠️ issue if needed
