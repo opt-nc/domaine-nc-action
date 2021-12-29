@@ -12,9 +12,9 @@ on:
         required: true
         default: 5
         type: number
-    secrets:
-      rapidapi_key:
-        required: true
+    # secrets:
+    #   rapidapi_key:
+    #     required: true
 
 jobs:
   check:
@@ -25,7 +25,8 @@ jobs:
         uses: ./
         id: meta
         with:
-          api-key: ${{ secrets.rapidapi_key }}
+          # api-key: ${{ secrets.rapidapi_key }}
+          api-key: ${{ secrets.RAPID_API_KEY }}
           name: ${{ github.event.inputs.domain }}
 
       - name: Create an warning ⚠️ issue if needed
@@ -34,8 +35,8 @@ jobs:
         with:
           script: |
             github.rest.issues.create({
-              owner: '${{ github.repository_owner	}}',
-              repo: '${{ github.repository	}}'.split('/')[1],
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.repository }}'.split('/')[1],
               title: ':warning: Domain ${{ github.event.inputs.domain }}.nc is about to expire :warning:',
               body: ':point_right: ${{ github.event.inputs.domain }}.nc will expire on ${{ steps.meta.outputs.expirationDate }}',
               labels: ['expired-domain']
@@ -47,8 +48,8 @@ jobs:
         with:
           script: |
             github.rest.issues.create({
-              owner: '${{ github.repository_owner	}}',
-              repo: '${{ github.repository	}}'.split('/')[1],
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.repository }}'.split('/')[1],
               title: ':rotating_light: Domain ${{ github.event.inputs.domain }}.nc has expired :rotating_light:',
               body: ':point_right: ${{ github.event.inputs.domain }}.nc has expired on ${{ steps.meta.outputs.expirationDate }}',
               labels: ['expired-domain']
