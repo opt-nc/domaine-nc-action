@@ -13,7 +13,7 @@ on:
         default: 5
         type: number
     secrets:
-      rapidapi-key:
+      rapidapi_key:
         required: true
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
         uses: ./
         id: meta
         with:
-          api-key: ${{ secrets.rapidapi-key }}
+          api-key: ${{ secrets.rapidapi_key }}
           name: ${{ github.event.inputs.domain }}
 
       - name: Create an warning ⚠️ issue if needed
