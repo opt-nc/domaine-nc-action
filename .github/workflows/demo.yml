@@ -36,9 +36,9 @@ jobs:
           echo "expired: " ${{ steps.meta.outputs.expired }}
           echo "daysBeforeExpiration: " ${{ steps.meta.outputs.daysBeforeExpiration }}
           echo "overlap: " ${{ steps.meta.outputs.daysBeforeExpiration <= github.event.inputs.daysBeforeExpiration }}
-          
+
       - name: Create an warning ⚠️ issue if needed
-        if: ${{ !steps.meta.outputs.expired && steps.meta.outputs.daysBeforeExpiration <= github.event.inputs.daysBeforeExpiration }}
+        if: ${{ steps.meta.outputs.expired == false && steps.meta.outputs.daysBeforeExpiration <= github.event.inputs.daysBeforeExpiration }}
         uses: actions/github-script@v5
         with:
           script: |
@@ -51,7 +51,7 @@ jobs:
             });
 
       - name: Create an alert 🚨 issue if needed
-        if: ${{ steps.meta.outputs.expired }}
+        if: ${{ steps.meta.outputs.expired == true }}
         uses: actions/github-script@v5
         with:
           script: |
