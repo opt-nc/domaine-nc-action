@@ -26,6 +26,6 @@ jobs:
           api-key: ${{ secrets.RAPID_API_KEY }}
           name: opt
       - run: |
-          echo ${{ steps.test.outputs.expired }}
-          echo ${{ steps.test.outputs.expirationDate }}
-          echo ${{ steps.test.outputs.daysBeforeExpiration }}
+          echo "Expired: ${{ steps.test.outputs.expired }}" 
+          echo "Expiration date: ${{ steps.test.outputs.expirationDate }}" 
+          echo "Day(s) before expiration: ${{ steps.test.outputs.daysBeforeExpiration }}"
