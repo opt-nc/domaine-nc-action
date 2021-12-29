@@ -23,7 +23,9 @@ module.exports = async function () {
     });
 
     if (response.data.expired) {
-      core.wan(`⚠️ ${name}.${ext} is expired since ${response.data.dateExpiration} ⚠️`);
+      core.wan(`🚨 ${name}.${ext} is expired since ${response.data.dateExpiration} 🚨`);
+    } else if (response.data.nbDaysBeforeExpires <= 14) {
+      core.warn(`⚠️ ${name}.${ext} expires within ${response.data.nbDaysBeforeExpires} day(s) ⚠️`);
     } else {
       core.info(`✅ ${name}.${ext} expires within ${response.data.nbDaysBeforeExpires} day(s)`);
     }
