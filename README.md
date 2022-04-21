@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Get validity metadata for opt.nc
         id: metadata
-        uses: opt-nc/domain-nc-action@v1
+        uses: opt-nc/domaine-nc-action@v1
         with:
           api-key: ${{ secrets.RAPID_API_KEY }}
           name: opt
