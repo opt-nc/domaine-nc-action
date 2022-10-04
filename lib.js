@@ -30,6 +30,8 @@ module.exports = async function () {
   } catch (error) {
     if (error.response && error.response.status === 401) {
       core.setFailed('HTTP 401 : maybe invalid api-key ?');
+    } else if (error.response && error.response.data) {
+      core.setFailed(error.response.data);
     } else {
       core.setFailed(error);
     }
