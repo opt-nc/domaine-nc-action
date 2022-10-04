@@ -67,4 +67,4 @@ typings/
 .next
 
 # act
-./.secrets
+.secrets
